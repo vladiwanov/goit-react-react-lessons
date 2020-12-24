@@ -1,8 +1,9 @@
-import React,{Fragment} from 'react';
+// import React,{Fragment} from 'react';
 import ReactDOM from 'react-dom';
 
 // import './index.css';
 import App from './components/App';
+// console.log(App());
 
 // import reportWebVitals from './reportWebVitals';
 
@@ -51,7 +52,7 @@ import App from './components/App';
 // });
 // ReactDOM.render(productWithChildrenInProps, document.querySelector('#root'));
 
-const productPrice = 10.99;
+//const productPrice = 10.99;
 
 // const productInJSX = (
 //   <div>

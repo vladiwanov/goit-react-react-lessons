@@ -13,11 +13,14 @@ import Form from './Form';
 // import s from './App.module.css'
 
 class App extends Component {
+  //| --------------CONSTRUCTOR------------------
   state = {
     todos: todosArray,
     inputValue: '',
     filter: '',
   };
+
+  //| --------------METODS------------------
 
   // .form metods-complect:
   onSubmitHandler = data => {
@@ -94,6 +97,8 @@ class App extends Component {
       0,
     );
   };
+
+  //| --------------RENDER------------------
 
   render() {
     const { todos, filter, inputValue } = this.state;

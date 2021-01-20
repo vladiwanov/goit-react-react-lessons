@@ -1,40 +1,55 @@
 // ----BEGIN-----------
 import { Component } from 'react';
-import Counter from './Counter/Counter';
-import ColorPicker from './ColorPicker';
-import colorPickerOptions from '../Lesson-3-4/ColorPicker/colorPickerOptions/colorPickerOptions.json';
+// import Counter from './Counter/Counter';
+// import ColorPicker from './ColorPicker';
+// import colorPickerOptions from '../Lesson-3-6/ColorPicker/colorPickerOptions/colorPickerOptions.json';
 import TodoList from './TodoList';
 import todosArray from './TodoList/todos.json';
 import TodoEditor from './TodoList/TodoEditor/TodoEditor';
 import shortid from 'shortid';
 import Filter from './TodoList/Filter/Filter';
 // import Container from './Container'
-import Form from './Form';
+// import Form from './Form';
 // import s from './App.module.css'
+import Modal from './Modal';
 
 class App extends Component {
   //| --------------CONSTRUCTOR------------------
   state = {
     todos: todosArray,
+    // todos: [],
     inputValue: '',
     filter: '',
+    showModal: false,
   };
 
   //| --------------METODS------------------
 
-  // .form metods-complect:
-  onSubmitHandler = data => {
-    console.log(data);
-  };
+  componentDidMount() {
+    const parsedTodos = JSON.parse(localStorage.getItem('todos'));
+    if (parsedTodos) {
+      this.setState({ todos: parsedTodos });
+    }
+  }
+
+  componentDidUpdate(prevState, prevProps) {
+    //❌ this.setState() - нельзя ставить просто так т.к.компонент зацикливается(будет ависание броузера и переполнение)
+    //✅ this.setState() - вызывается только в результате проверки каког-то условия (например при http запросах)
+    if (prevState !== this.state) {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+  }
+
+  // // .form metods-complect:
+  // onSubmitHandler = data => {
+  //   console.log(data);
+  // };
 
   // TODO metods-complect:
   handleInputChange = event => {
     console.log(event.currentTarget.value);
 
     this.setState({ inputValue: event.currentTarget.value });
-    console.log(this.state.inputValue);
-
-    this.setState = { inputValue: 'AAAAA' };
     console.log(this.state.inputValue);
   };
 
@@ -98,11 +113,20 @@ class App extends Component {
     );
   };
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
+
   //| --------------RENDER------------------
 
   render() {
-    const { todos, filter, inputValue } = this.state;
-    const visibleTodos = this.getVisibleTodos();
+    const {
+      todos,
+      filter,
+      showModal,
+      // inputValue
+    } = this.state;
+    // const visibleTodos = this.getVisibleTodos();
     // const completedTodosCount = todos.filter(todo => todo.completed);
     const completedTodosVar = this.getCompletedTodoCount();
     // console.log(completedTodosCount.length);
@@ -110,10 +134,11 @@ class App extends Component {
 
     return (
       <>
-        <Form onSubmit={this.onSubmitHandler} />
-        <Form onSubmit={this.onSubmitHandler} />
-        <Counter initialValue="" />
-        <ColorPicker options={colorPickerOptions} />
+        {/* <Form onSubmit={this.onSubmitHandler} /> */}
+        {/* <Form onSubmit={this.onSubmitHandler} /> */}
+        {/* <Counter initialValue="" /> */}
+        {/* <ColorPicker options={colorPickerOptions} /> */}
+
         <div>
           <p>Общее количество:{todos.length}</p>
           <p>количество выполненных:{completedTodosVar}</p>
@@ -126,6 +151,19 @@ class App extends Component {
             onDeleteTodo={this.deleteTodo}
             onToggleCompleted={this.toggleCompleted}
           />
+        </div>
+        <div>
+          <button type="button" onClick={this.toggleModal}>
+            Open modal window
+          </button>
+          {showModal && (
+            <Modal onClose={this.toggleModal}>
+              <h1>Hi this is ....... </h1>
+              <button type="button" onClick={this.toggleModal}>
+                Close{' '}
+              </button>
+            </Modal>
+          )}
         </div>
       </>
     );

@@ -12,6 +12,12 @@ import Filter from './TodoList/Filter/Filter';
 // import Form from './Form';
 // import s from './App.module.css'
 import Modal from './Modal';
+import Clock from './Clock';
+import Tabs from './Tabs/Tabs';
+import tabs from './data/tabs.json';
+import IconButton from './IconButton';
+import { ReactComponent as AddIcon } from './IconButton/icons/add.svg';
+import { ReactComponent as DeleteIcon } from './IconButton/icons/delete.svg';
 
 class App extends Component {
   //| --------------CONSTRUCTOR------------------
@@ -32,11 +38,16 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(prevState, prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    const nextTodos = this.state.todos;
+    const prevTodos = prevState.todos;
     //❌ this.setState() - нельзя ставить просто так т.к.компонент зацикливается(будет ависание броузера и переполнение)
     //✅ this.setState() - вызывается только в результате проверки каког-то условия (например при http запросах)
     if (prevState !== this.state) {
-      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+      localStorage.setItem('todos', JSON.stringify(nextTodos));
+    }
+    if (nextTodos.length > prevTodos.length && prevTodos.length !== 0) {
+      this.toggleModal();
     }
   }
 
@@ -85,6 +96,8 @@ class App extends Component {
     this.setState(({ todos }) => ({
       todos: [todo, ...todos],
     }));
+
+    // this.toggleModal()
   };
 
   deleteTodo = todoId => {
@@ -134,6 +147,10 @@ class App extends Component {
 
     return (
       <>
+        <IconButton onClick={this.toggleModal} aria-label="add todo">
+          <AddIcon width="40" height="40" fill="#fff" />
+        </IconButton>
+
         {/* <Form onSubmit={this.onSubmitHandler} /> */}
         {/* <Form onSubmit={this.onSubmitHandler} /> */}
         {/* <Counter initialValue="" /> */}
@@ -142,7 +159,7 @@ class App extends Component {
         <div>
           <p>Общее количество:{todos.length}</p>
           <p>количество выполненных:{completedTodosVar}</p>
-          <TodoEditor onSubmit={this.addTodo} />
+
           <Filter value={filter} onChange={this.changeFilter} />
 
           <TodoList
@@ -152,16 +169,24 @@ class App extends Component {
             onToggleCompleted={this.toggleCompleted}
           />
         </div>
+
         <div>
-          <button type="button" onClick={this.toggleModal}>
+          {/* <button type="button" onClick={this.toggleModal}>
             Open modal window
-          </button>
+          </button> */}
           {showModal && (
             <Modal onClose={this.toggleModal}>
               <h1>Hi this is ....... </h1>
-              <button type="button" onClick={this.toggleModal}>
+              <Clock />
+              <Tabs items={tabs} />
+              <IconButton onClick={this.toggleModal}>
+                <DeleteIcon width="40" height="40" fill="#fff" />
+              </IconButton>
+
+              <TodoEditor onSubmit={this.addTodo} />
+              {/* <button type="button" onClick={this.toggleModal}>
                 Close{' '}
-              </button>
+              </button> */}
             </Modal>
           )}
         </div>

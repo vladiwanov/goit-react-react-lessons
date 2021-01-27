@@ -1,7 +1,7 @@
 /* @import 'styles/shared.scss'; */
 
 .todoeditor {
-  width: 600px;
+  width: 650px;
   display: flex;
   flex-direction: column;
   padding: 16px;
@@ -76,7 +76,7 @@
 .TodoEditor__button {
   @extend %button;
 
-  width: 100%;
+  /* width: 100%; */
   margin-left: auto;
   border-radius: 4px;
   padding: 12px 24px;

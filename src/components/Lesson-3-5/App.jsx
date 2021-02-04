@@ -1,15 +1,15 @@
 // ----BEGIN-----------
 import { Component } from 'react';
-// import Counter from './Counter/Counter';
-// import ColorPicker from './ColorPicker';
-// import colorPickerOptions from '../Lesson-3-6/ColorPicker/colorPickerOptions/colorPickerOptions.json';
+import Counter from './Counter/Counter';
+import ColorPicker from './ColorPicker';
+import colorPickerOptions from './ColorPicker/colorPickerOptions/colorPickerOptions.json';
 import TodoList from './TodoList';
 import todosArray from './TodoList/todos.json';
 import TodoEditor from './TodoList/TodoEditor/TodoEditor';
 import shortid from 'shortid';
 import Filter from './TodoList/Filter/Filter';
 // import Container from './Container'
-// import Form from './Form';
+import Form from './Form';
 // import s from './App.module.css'
 import Modal from './Modal';
 import Clock from './Clock';
@@ -133,17 +133,12 @@ class App extends Component {
   //| --------------RENDER------------------
 
   render() {
-    const {
-      todos,
-      filter,
-      showModal,
-      // inputValue
-    } = this.state;
-    // const visibleTodos = this.getVisibleTodos();
-    // const completedTodosCount = todos.filter(todo => todo.completed);
+    const { todos, filter, showModal, inputValue } = this.state;
+    const visibleTodos = this.getVisibleTodos();
+    const completedTodosCount = todos.filter(todo => todo.completed);
     const completedTodosVar = this.getCompletedTodoCount();
-    // console.log(completedTodosCount.length);
-    // console.log(completedTodosVar);
+    console.log(completedTodosCount.length);
+    console.log(completedTodosVar);
 
     return (
       <>
@@ -151,10 +146,10 @@ class App extends Component {
           <AddIcon width="40" height="40" fill="#fff" />
         </IconButton>
 
-        {/* <Form onSubmit={this.onSubmitHandler} /> */}
-        {/* <Form onSubmit={this.onSubmitHandler} /> */}
-        {/* <Counter initialValue="" /> */}
-        {/* <ColorPicker options={colorPickerOptions} /> */}
+        <Form onSubmit={this.onSubmitHandler} />
+        <Form onSubmit={this.onSubmitHandler} />
+        <Counter initialValue="" />
+        <ColorPicker options={colorPickerOptions} />
 
         <div>
           <p>Общее количество:{todos.length}</p>

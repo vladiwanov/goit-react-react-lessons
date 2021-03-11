@@ -36,7 +36,7 @@ class ColorPicker extends Component {
     const { activeOptionIdx } = this.state;
     const { options } = this.props;
     const { label } = options[activeOptionIdx];
-    const activeClassName = `${s.active}`;
+    // const activeClassName = `${s.active}`;
     console.log('lable', { label });
     return (
       <div className={s.container}>

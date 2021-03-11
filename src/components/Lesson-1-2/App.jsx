@@ -24,7 +24,8 @@ export default function App() {
       {/* <Booklist books={favouriteBooks}/> */}
       {/* <h1> </h1>
       <Section title="best products">
-        <Product imgURL="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
+        <Product 
+        imgURL="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
           name="Tacos With Lime"
           price={20}
           quantity={70}

@@ -19,3 +19,12 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.NavLink{
+  font-size: 24px;
+  font-family: sans-serif;
+  color:currentColor;
+}
+ .NavLink--active{
+color:#50f050;
+ }

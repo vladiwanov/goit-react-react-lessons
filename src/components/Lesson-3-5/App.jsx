@@ -41,8 +41,8 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const nextTodos = this.state.todos;
     const prevTodos = prevState.todos;
-    //❌ this.setState() - нельзя ставить просто так т.к.компонент зацикливается(будет ависание броузера и переполнение)
-    //✅ this.setState() - вызывается только в результате проверки каког-то условия (например при http запросах)
+    //!❌ this.setState() - нельзя ставить просто так т.к.компонент зацикливается(будет ависание броузера и переполнение)
+    //'✅ this.setState() - вызывается только в результате проверки каког-то условия (например при http запросах)
     if (prevState !== this.state) {
       localStorage.setItem('todos', JSON.stringify(nextTodos));
     }

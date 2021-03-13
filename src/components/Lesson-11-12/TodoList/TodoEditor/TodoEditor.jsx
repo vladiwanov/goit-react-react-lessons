@@ -26,6 +26,8 @@ class TodoEditor extends Component {
     return (
       <form className="TodoEditor" onSubmit={this.handleSubmit}>
         <textarea
+          rows='10'
+          cols="70"
           className="TodoEditor__textarea"
           value={this.state.message}
           onChange={this.handleChange}

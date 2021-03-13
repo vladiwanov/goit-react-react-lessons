@@ -1,0 +1,50 @@
+import React from 'react';
+import './TodoList.module.css';
+import './TodoList.css';
+import Todo from './Todo';
+import classNames from 'classnames';
+
+// const TodoList = ({ todos, onDeleteTodo, onToggleCompleted}) => (
+//   <ul className="TodoList">
+//     {todos.map(({ id, text,completed }) => (
+//       <li key={id} className={classNames("TodoList__item", {
+//         'TodoList__item--completed':completed,
+//       })}>
+//         <input
+//           type="checkbox"
+//           className="TodoList__checkbox"
+//           checked={completed}
+//           onChange={onToggleCompleted}
+//         />
+//         <p className="TodoList__text">{text}</p>
+//         <button
+//           type="button"
+//           className="TodoList__btn"
+//           onClick={() => onDeleteTodo(id)}
+//         >
+//           Удалить
+//         </button>
+//       </li>
+//     ))}
+//   </ul>
+// );
+
+const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
+  <ul className="TodoList">
+    {todos.map(({ id, text, completed }) => (
+      <li
+        key={id}
+        className={classNames('TodoList__item', {
+          'TodoList__item--completed': completed,
+        })}
+      >
+        <Todo
+          options={{ id, text, completed }}
+          onDelete={() => onDeleteTodo(id)}
+          onToggleCompleted={() => onToggleCompleted(id)}
+        />
+      </li>
+    ))}
+  </ul>
+);
+export default TodoList;
